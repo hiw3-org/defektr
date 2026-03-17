@@ -1,3 +1,7 @@
+"""
+This module provides functionality to upload model files to Pinata IPFS using their API.
+"""
+
 import os
 import json
 import requests
