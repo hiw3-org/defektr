@@ -1,2 +1,4 @@
-.env
-dataset
+.venv/
+.vscode/
+
+data/datasets/
