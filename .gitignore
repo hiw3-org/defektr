@@ -2,3 +2,5 @@
 .vscode/
 
 data/datasets/
+
+training/architectures/__pycache__/
