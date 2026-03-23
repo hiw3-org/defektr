@@ -1,7 +1,7 @@
 {
   "challenge_id": "defektr-001",
   "challenge_block": 1000,
-  "deadline_block": 51000,
+  "deadline_block": 1500,
   "dataset": "mvtec_ad",
   "category": "bottle",
 

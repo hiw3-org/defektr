@@ -9,10 +9,10 @@
 NETUID = 3
 
 # How often set_weights() is called (standard Bittensor tempo, in blocks).
-EPOCH_TEMPO = 100  # ≈ 20 min
+EPOCH_TEMPO = 50   # ≈ 25 s on localnet  (100 ≈ 20 min on mainnet)
 
 # How long miners have to train and submit a model for a challenge (in blocks).
-CHALLENGE_INTERVAL = 50_000  # ≈ 7 days
+CHALLENGE_INTERVAL = 500  # ≈ 4 min on localnet  (50_000 ≈ 7 days on mainnet)
 
 # ---------------------------------------------------------------------------
 # Model cache
