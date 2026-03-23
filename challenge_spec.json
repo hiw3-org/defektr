@@ -1,0 +1,48 @@
+{
+  "challenge_id": "defektr-001",
+  "challenge_block": 1000,
+  "deadline_block": 51000,
+  "dataset": "mvtec_ad",
+  "category": "bottle",
+
+  "task": "binary_or_segmentation",
+  "description": "Binary defect classification is the minimum requirement. Models that also output a pixel-level defect mask (segmentation head) will score higher via the localisation component of the accuracy reward.",
+  "accepted_outputs": [
+    {
+      "type": "binary",
+      "outputs": [{"name": "confidence", "shape": [1], "dtype": "float32"}],
+      "description": "Sigmoid confidence score. Scores classification reward only (α_loc component = 0)."
+    },
+    {
+      "type": "segmentation",
+      "outputs": [
+        {"name": "confidence", "shape": [1],           "dtype": "float32"},
+        {"name": "mask",       "shape": [1, 256, 256], "dtype": "float32"}
+      ],
+      "description": "Sigmoid confidence + pixel-level defect mask. Scores both classification and localisation rewards."
+    }
+  ],
+
+  "constraints": {
+    "max_model_size_mb": 100,
+    "min_fps": 2,
+    "input_shape": [3, 256, 256],
+    "input_dtype": "float32",
+    "normalization": {
+      "mean": [0.485, 0.456, 0.406],
+      "std":  [0.229, 0.224, 0.225]
+    },
+    "threshold": 0.5
+  },
+
+  "scoring": {
+    "accuracy_weight":   0.50,
+    "speed_weight":      0.30,
+    "robustness_weight": 0.20,
+    "alpha_cls":         0.60,
+    "alpha_loc":         0.40,
+    "t_soft_s":          0.200,
+    "t_hard_s":          1.000,
+    "mask_agree_iou":    0.80
+  }
+}

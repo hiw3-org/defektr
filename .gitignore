@@ -5,3 +5,4 @@ data/datasets/
 
 training/architectures/__pycache__/
 .env
+CLAUDE.md
