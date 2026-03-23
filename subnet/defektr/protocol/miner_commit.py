@@ -20,7 +20,7 @@ def commit_cid(wallet: bt.Wallet, subtensor: bt.Subtensor, cid: str, netuid: int
         netuid:   Subnet UID (defaults to NETUID from config).
     """
     bt.logging.info(f"Committing CID {cid!r} to netuid {netuid} …")
-    subtensor.commit(wallet, netuid, cid)
+    subtensor.set_commitment(wallet, netuid, cid)
     bt.logging.info("Commit successful.")
 
 

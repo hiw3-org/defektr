@@ -272,6 +272,22 @@ def upload_and_commit(
 
     model_path = str(model_path)
 
+    # 0. Merge external data into a single self-contained file if needed
+    data_file = Path(model_path).with_suffix("") .parent / (Path(model_path).stem + ".onnx.data")
+    if not data_file.exists():
+        data_file = Path(str(model_path) + ".data")
+    _merged_tmp = None
+    if data_file.exists():
+        print(f"[0/7] Merging external data file into single ONNX …")
+        import onnx as _onnx
+        _m = _onnx.load(model_path)
+        _tmp = tempfile.NamedTemporaryFile(suffix=".onnx", delete=False, prefix="defektr_merged_")
+        _tmp.close()
+        _onnx.save(_m, _tmp.name, save_as_external_data=False)
+        model_path = _tmp.name
+        _merged_tmp = _tmp.name
+        print(f"      merged → {model_path} ({Path(model_path).stat().st_size/1024/1024:.1f} MB)")
+
     # 1. Inspect
     print(f"\n[1/7] Inspecting {model_path} …")
     onnx_info = inspect_onnx(model_path)
@@ -299,6 +315,8 @@ def upload_and_commit(
     print(f"      {sha256}")
 
     if dry_run:
+        if _merged_tmp:
+            Path(_merged_tmp).unlink(missing_ok=True)
         print("\n[dry-run] Validation passed. Stopping before upload.")
         return ""
 
@@ -354,9 +372,12 @@ def upload_and_commit(
 
     # 7. On-chain commit
     print("[7/7] Committing metadata CID on-chain …")
-    netuid = challenge_spec.get("netuid", 3)
-    subtensor.commit(wallet, netuid, meta_cid)
+    netuid = challenge_spec.get("netuid", 2)
+    subtensor.set_commitment(wallet, netuid, meta_cid)
     print(f"      ✓ committed to netuid {netuid}")
+
+    if _merged_tmp:
+        Path(_merged_tmp).unlink(missing_ok=True)
 
     print(f"\nDone. Metadata CID: {meta_cid}")
     return meta_cid

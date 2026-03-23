@@ -78,7 +78,7 @@ def publish(
     print(f"Challenge spec CID: {cid}")
 
     print(f"Committing CID on-chain (netuid={netuid}) …")
-    subtensor.commit(wallet, netuid, cid)
+    subtensor.set_commitment(wallet, netuid, cid)
     print(f"✅ Done. Miners can fetch spec via:")
     print(f"   subtensor.get_commitment({netuid}, <validator_uid>)  → {cid}")
     return cid

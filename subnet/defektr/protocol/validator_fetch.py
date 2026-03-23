@@ -14,12 +14,12 @@ import bittensor as bt
 from defektr.config import NETUID, CACHE_DIR
 
 # Allow importing data.ipfs when this module is used from the project root.
-_ROOT = Path(__file__).resolve().parent.parent.parent.parent.parent  # …/defektr/
+_ROOT = Path(__file__).resolve().parent.parent.parent.parent  # …/defektr/
 if str(_ROOT) not in sys.path:
     sys.path.insert(0, str(_ROOT))
 
 
-def fetch_all_cids(subtensor: bt.Subtensor, metagraph: bt.metagraph, netuid: int = NETUID) -> dict[int, str]:
+def fetch_all_cids(subtensor: bt.Subtensor, metagraph: bt.Metagraph, netuid: int = NETUID) -> dict[int, str]:
     """
     Read the current metadata CID for every registered miner UID.
 

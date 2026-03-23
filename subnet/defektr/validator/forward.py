@@ -25,7 +25,7 @@ import onnxruntime as ort
 import bittensor as bt
 
 # Project root on sys.path so we can import data.*
-_ROOT = Path(__file__).resolve().parent.parent.parent.parent.parent  # …/defektr/
+_ROOT = Path(__file__).resolve().parent.parent.parent.parent  # …/defektr/
 if str(_ROOT) not in sys.path:
     sys.path.insert(0, str(_ROOT))
 
