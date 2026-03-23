@@ -6,7 +6,7 @@
 # Chain
 # ---------------------------------------------------------------------------
 
-NETUID = 3
+NETUID = 2
 
 # How often set_weights() is called (standard Bittensor tempo, in blocks).
 EPOCH_TEMPO = 50   # ≈ 25 s on localnet  (100 ≈ 20 min on mainnet)

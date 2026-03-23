@@ -28,7 +28,7 @@ import bittensor as bt
 
 ENDPOINT    = "ws://127.0.0.1:9944"
 WALLET_PATH = str(Path(__file__).resolve().parent.parent.parent / "wallets")
-NETUID      = 3
+NETUID      = 2
 FUND_RAO    = 2_000 * 10**9   # 2000 TAO per coldkey
 STAKE_TAO   = 100             # TAO to stake per validator hotkey
 
