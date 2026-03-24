@@ -6,3 +6,6 @@ data/datasets/
 training/architectures/__pycache__/
 .env
 CLAUDE.md
+wallets/
+*_pycache__/
+model_cache/
