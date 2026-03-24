@@ -114,8 +114,8 @@ def main():
     # ── Step 2: Fund coldkeys ─────────────────────────────────────────────────
     # We only need to fund each unique coldkey once (all hotkeys share it).
     print(f"\n[2/4] Funding coldkeys ({FUND_RAO // 10**9} TAO each) …")
-    miner_coldkey = bt.Wallet(name=MINER_WALLET, path=WALLET_PATH).coldkey.ss58_address
-    val_coldkey   = bt.Wallet(name=VALIDATOR_WALLET, path=WALLET_PATH).coldkey.ss58_address
+    miner_coldkey = bt.Wallet(name=MINER_WALLET, path=WALLET_PATH).coldkeypub.ss58_address
+    val_coldkey   = bt.Wallet(name=VALIDATOR_WALLET, path=WALLET_PATH).coldkeypub.ss58_address
     _fund_coldkey(substrate, miner_coldkey, f"miner coldkey ({miner_coldkey[:8]}…)")
     _fund_coldkey(substrate, val_coldkey,   f"validator coldkey ({val_coldkey[:8]}…)")
 
