@@ -27,15 +27,20 @@ import bittensor as bt
 # ── Config ────────────────────────────────────────────────────────────────────
 
 ENDPOINT    = "ws://127.0.0.1:9944"
-WALLET_PATH = str(Path(__file__).resolve().parent.parent.parent / "wallets")
+WALLET_PATH = str(Path(__file__).resolve().parent.parent / "wallets")
 NETUID      = 2
 FUND_RAO    = 2_000 * 10**9   # 2000 TAO per coldkey
 STAKE_TAO   = 100             # TAO to stake per validator hotkey
 
-MINER_WALLET     = "miner"
 VALIDATOR_WALLET = "validator"
-N_MINERS         = 10
-N_VALIDATORS     = 3
+N_VALIDATORS     = 0   # validator uses default hotkey, registered via register_neurons.py
+
+# Each miner gets its own coldkey to avoid TxRateLimit (1 registration per coldkey per interval).
+# (wallet_name, hotkey_name, description)
+MINER_SPECS = [
+    ("miner",  "hotkey_0", "baseline"),   # miner coldkey
+    ("miner2", "default",  "improved"),   # separate coldkey — no rate-limit conflict
+]
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
 
@@ -57,12 +62,27 @@ def _fund_coldkey(substrate, address: str, label: str):
     print(f"  Fund {label}: {status}")
 
 
-def _register(subtensor, wallet, label: str):
+def _register(subtensor, wallet, label: str, max_retries: int = 30):
+    """Register via burned_register, retrying until the interval slot is free.
+
+    Custom error 6 = RegistrationsThisInterval >= TargetRegistrationsPerInterval.
+    On a fast devnet the interval resets in seconds — retrying handles it.
+    Unencrypted coldkeys (e.g. miner2) won't prompt for a password on retries.
+    """
     if subtensor.is_hotkey_registered(netuid=NETUID, hotkey_ss58=wallet.hotkey.ss58_address):
         print(f"  Register {label}: already registered ✅")
-        return
-    result = subtensor.burned_register(wallet=wallet, netuid=NETUID)
-    print(f"  Register {label}: {'✅' if result else '❌'}")
+        return True
+
+    for attempt in range(1, max_retries + 1):
+        subtensor.burned_register(wallet=wallet, netuid=NETUID)
+        time.sleep(2)
+        if subtensor.is_hotkey_registered(netuid=NETUID, hotkey_ss58=wallet.hotkey.ss58_address):
+            print(f"  Register {label}: ✅")
+            return True
+        time.sleep(3)  # wait for registration interval to roll over, then retry
+
+    print(f"  Register {label}: ❌  gave up after {max_retries} attempts")
+    return False
 
 
 def _add_stake(subtensor, wallet, label: str):
@@ -91,14 +111,16 @@ def main():
     miner_wallets     = []
     validator_wallets = []
 
-    for i in range(N_MINERS):
-        hotkey_name = f"hotkey_{i}"
-        w = bt.Wallet(name=MINER_WALLET, hotkey=hotkey_name, path=WALLET_PATH)
+    for wallet_name, hotkey_name, desc in MINER_SPECS:
+        w = bt.Wallet(name=wallet_name, hotkey=hotkey_name, path=WALLET_PATH)
+        if not w.coldkey_file.exists_on_device():
+            w.create_new_coldkey(use_password=False, overwrite=False)
+            print(f"  Created coldkey {wallet_name}  {w.coldkeypub.ss58_address}")
         if not w.hotkey_file.exists_on_device():
             w.create_new_hotkey(use_password=False, overwrite=False)
-            print(f"  Created miner/{hotkey_name}  {w.hotkey.ss58_address}")
+            print(f"  Created {wallet_name}/{hotkey_name}  {w.hotkey.ss58_address}  ({desc})")
         else:
-            print(f"  Exists  miner/{hotkey_name}  {w.hotkey.ss58_address}")
+            print(f"  Exists  {wallet_name}/{hotkey_name}  {w.hotkey.ss58_address}  ({desc})")
         miner_wallets.append(w)
 
     for i in range(N_VALIDATORS):
@@ -112,24 +134,30 @@ def main():
         validator_wallets.append(w)
 
     # ── Step 2: Fund coldkeys ─────────────────────────────────────────────────
-    # We only need to fund each unique coldkey once (all hotkeys share it).
+    # Fund each unique coldkey once (multiple hotkeys sharing a coldkey get one fund).
     print(f"\n[2/4] Funding coldkeys ({FUND_RAO // 10**9} TAO each) …")
-    miner_coldkey = bt.Wallet(name=MINER_WALLET, path=WALLET_PATH).coldkeypub.ss58_address
-    val_coldkey   = bt.Wallet(name=VALIDATOR_WALLET, path=WALLET_PATH).coldkeypub.ss58_address
-    _fund_coldkey(substrate, miner_coldkey, f"miner coldkey ({miner_coldkey[:8]}…)")
-    _fund_coldkey(substrate, val_coldkey,   f"validator coldkey ({val_coldkey[:8]}…)")
+    funded = set()
+    for w in miner_wallets:
+        ck = w.coldkeypub.ss58_address
+        if ck not in funded:
+            _fund_coldkey(substrate, ck, f"{w.name} coldkey ({ck[:8]}…)")
+            funded.add(ck)
+    val_coldkey = bt.Wallet(name=VALIDATOR_WALLET, path=WALLET_PATH).coldkeypub.ss58_address
+    if val_coldkey not in funded:
+        _fund_coldkey(substrate, val_coldkey, f"validator coldkey ({val_coldkey[:8]}…)")
+        funded.add(val_coldkey)
 
     time.sleep(2)  # Let balances settle
 
     # ── Step 3: Register all hotkeys ─────────────────────────────────────────
-    print(f"\n[3/4] Registering {N_MINERS} miner + {N_VALIDATORS} validator hotkeys on netuid {NETUID} …")
+    print(f"\n[3/4] Registering {len(miner_wallets)} miner + {N_VALIDATORS} validator hotkeys on netuid {NETUID} …")
     for w in miner_wallets:
-        _register(subtensor, w, f"miner/{w.hotkey_str}")
-        time.sleep(1)   # avoid tx flood
+        _register(subtensor, w, f"{w.name}/{w.hotkey_str}")
+        time.sleep(13)  # MaxRegistrationsPerBlock=1 — wait for next block
 
     for w in validator_wallets:
         _register(subtensor, w, f"validator/{w.hotkey_str}")
-        time.sleep(1)
+        time.sleep(13)
 
     # ── Step 4: Stake validators ──────────────────────────────────────────────
     print(f"\n[4/4] Adding {STAKE_TAO} TAO stake to each validator hotkey …")

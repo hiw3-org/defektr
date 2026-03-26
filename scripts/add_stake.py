@@ -1,6 +1,8 @@
-import bittensor as bt                                                                                                                                                                                                                    
+import logging
+import bittensor as bt
+logging.getLogger("bittensor").setLevel(logging.CRITICAL)                                                                                                                                                                                                                    
 subtensor = bt.Subtensor(network='ws://127.0.0.1:9944')                                                                                                                                                                                   
-wallet = bt.Wallet(name='validator', hotkey='default', path='/home/luka/ws/bittensor_test/wallets')                                                                                                                                       
+wallet = bt.Wallet(name='validator', hotkey='default', path='/home/luka/ws/bittensor_test/defektr/wallets')                                                                                                                                       
 NETUID = 2
 subtensor.add_stake(
 	wallet=wallet,

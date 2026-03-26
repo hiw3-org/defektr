@@ -8,7 +8,7 @@ Usage:
     python scripts/publish_challenge.py \
         --spec   challenge_spec.json \
         --wallet-name validator --wallet-hotkey hotkey_0 \
-        --wallet-path /home/luka/ws/bittensor_test/wallets \
+        --wallet-path /home/luka/ws/bittensor_test/defektr/wallets \
         --network ws://127.0.0.1:9944
 
     # Update block numbers automatically from the current block:
@@ -92,7 +92,7 @@ if __name__ == "__main__":
     p.add_argument("--spec",            default="challenge_spec.json")
     p.add_argument("--wallet-name",     default="validator")
     p.add_argument("--wallet-hotkey",   default="hotkey_0")
-    p.add_argument("--wallet-path",     default="/home/luka/ws/bittensor_test/wallets")
+    p.add_argument("--wallet-path",     default="/home/luka/ws/bittensor_test/defektr/wallets")
     p.add_argument("--network",         default="ws://127.0.0.1:9944")
     p.add_argument("--netuid",          type=int, default=NETUID)
     p.add_argument("--update-blocks",   action="store_true",
