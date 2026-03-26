@@ -20,7 +20,20 @@ import time
 import argparse
 from pathlib import Path
 
+import logging
 import bittensor as bt
+import bittensor.utils.networking as _bt_net
+
+# We don't use Dendrite/Axon — skip the external-IP lookup that requires internet.
+_bt_net.get_external_ip = lambda: "127.0.0.1"
+
+# Suppress the SDK's "NoneType not subscriptable" spam from get_commitment()
+# calls on UIDs that have never committed (e.g. subnet owner uid=0).
+_orig_bt_error = bt.logging.error
+def _filtered_bt_error(msg, *args, **kwargs):
+    if "NoneType" not in str(msg):
+        _orig_bt_error(msg, *args, **kwargs)
+bt.logging.error = _filtered_bt_error
 
 # Make sure the subnet package is importable when run from project root.
 _SUBNET_DIR = Path(__file__).resolve().parent.parent
@@ -69,6 +82,11 @@ class Validator(BaseValidatorNeuron):
 
         self.load_state()
 
+    async def concurrent_forward(self):
+        # Run exactly one forward at a time — our substrate calls are synchronous
+        # and the WebSocket can't handle concurrent recv() from multiple coroutines.
+        await self.forward()
+
     async def forward(self):
         return await forward(self)
 
@@ -76,9 +94,12 @@ class Validator(BaseValidatorNeuron):
 if __name__ == "__main__":
     with Validator() as validator:
         while True:
-            bt.logging.info(
-                f"Validator running | block={validator.block} "
-                f"step={validator.step} "
-                f"cached_models={len(validator.model_cache)}"
-            )
+            try:
+                bt.logging.info(
+                    f"Validator running | block={validator.block} "
+                    f"step={validator.step} "
+                    f"cached_models={len(validator.model_cache)}"
+                )
+            except Exception:
+                pass
             time.sleep(12)

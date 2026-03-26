@@ -119,10 +119,9 @@ def main():
             # Resync metagraph periodically
             metagraph.sync(subtensor=subtensor)
 
-            incentive = float(metagraph.I[my_uid])
-            rank      = float(metagraph.R[my_uid])
+            incentive = float(metagraph.incentive[my_uid])
             bt.logging.info(
-                f"[block {block}] uid={my_uid}  incentive={incentive:.4f}  rank={rank:.4f}"
+                f"[block {block}] uid={my_uid}  incentive={incentive:.4f}"
             )
 
             time.sleep(cfg.poll_interval)

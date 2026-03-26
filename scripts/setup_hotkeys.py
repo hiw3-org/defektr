@@ -33,13 +33,22 @@ FUND_RAO    = 2_000 * 10**9   # 2000 TAO per coldkey
 STAKE_TAO   = 100             # TAO to stake per validator hotkey
 
 VALIDATOR_WALLET = "validator"
-N_VALIDATORS     = 0   # validator uses default hotkey, registered via register_neurons.py
+N_VALIDATORS     = 2   # hotkey_0 + hotkey_1; validator/default is registered via register_neurons.py
 
 # Each miner gets its own coldkey to avoid TxRateLimit (1 registration per coldkey per interval).
-# (wallet_name, hotkey_name, description)
+# 5 baseline (mobilenet_v2) + 5 improved (mobilenet_v2_unet), alternating.
+# (wallet_name, hotkey_name, model)
 MINER_SPECS = [
-    ("miner",  "hotkey_0", "baseline"),   # miner coldkey
-    ("miner2", "default",  "improved"),   # separate coldkey — no rate-limit conflict
+    ("miner",   "hotkey_0", "baseline"),
+    ("miner2",  "default",  "improved"),
+    ("miner3",  "default",  "baseline"),
+    ("miner4",  "default",  "improved"),
+    ("miner5",  "default",  "baseline"),
+    ("miner6",  "default",  "improved"),
+    ("miner7",  "default",  "baseline"),
+    ("miner8",  "default",  "improved"),
+    ("miner9",  "default",  "baseline"),
+    ("miner10", "default",  "improved"),
 ]
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
