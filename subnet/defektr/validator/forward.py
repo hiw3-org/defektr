@@ -228,6 +228,24 @@ async def forward(self) -> None:
             challenge_spec = challenge_spec,
         )
 
+    # ── Copy detection ────────────────────────────────────────────────────────
+    # If two miners score within COPY_THRESHOLD of each other, the later-registered
+    # one (higher UID = registered after) is treated as a copy and zeroed out.
+    COPY_THRESHOLD = 0.002  # 0.2 %
+    for i, uid_i in enumerate(miner_uids):
+        if scores[i] == 0.0:
+            continue
+        for j, uid_j in enumerate(miner_uids):
+            if uid_j <= uid_i or scores[j] == 0.0:
+                continue
+            if abs(float(scores[i]) - float(scores[j])) < COPY_THRESHOLD:
+                bt.logging.warning(
+                    f"[copy-detection] uid={uid_j} score={scores[j]:.4f} matches "
+                    f"uid={uid_i} score={scores[i]:.4f} (diff={abs(float(scores[i])-float(scores[j])):.4f}) "
+                    f"— uid={uid_j} penalized to 0 (registered after uid={uid_i})"
+                )
+                scores[j] = 0.0
+
     # ── Update EMA scores ─────────────────────────────────────────────────────
     self.update_scores(scores, miner_uids)
 

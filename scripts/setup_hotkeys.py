@@ -20,6 +20,7 @@ registration is idempotent (burned_register will no-op if already registered).
 
 import sys
 import time
+import argparse
 from pathlib import Path
 
 import bittensor as bt
@@ -110,6 +111,14 @@ def _add_stake(subtensor, wallet, label: str):
 # ── Main ──────────────────────────────────────────────────────────────────────
 
 def main():
+    parser = argparse.ArgumentParser(description="Defektr hotkey setup")
+    parser.add_argument("--miners", type=int, default=10,
+                        help="Number of miners to create/register (0–10, default 10)")
+    args = parser.parse_args()
+
+    n_miners = max(0, min(10, args.miners))
+    active_specs = MINER_SPECS[:n_miners]
+
     print(f"Connecting to {ENDPOINT} …")
     subtensor = bt.Subtensor(network=ENDPOINT)
     substrate = subtensor.substrate
@@ -120,7 +129,7 @@ def main():
     miner_wallets     = []
     validator_wallets = []
 
-    for wallet_name, hotkey_name, desc in MINER_SPECS:
+    for wallet_name, hotkey_name, desc in active_specs:
         w = bt.Wallet(name=wallet_name, hotkey=hotkey_name, path=WALLET_PATH)
         if not w.coldkey_file.exists_on_device():
             w.create_new_coldkey(use_password=False, overwrite=False)
