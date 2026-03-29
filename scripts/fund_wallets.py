@@ -39,6 +39,6 @@ receipt = substrate.submit_extrinsic(extrinsic, wait_for_inclusion=True)
 
 if receipt.is_success:
     for name in TARGETS:
-        print(f"{name}: ✅")
+        print(f"{name}: OK")
 else:
-    print(f"❌ {receipt.error_message}")
+    print(f"ERROR {receipt.error_message}")

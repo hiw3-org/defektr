@@ -237,7 +237,7 @@ if __name__ == "__main__":
 
     if args.cmd == "upload":
         result = upload(args.file, name=args.name, keyvalues=parse_kv(args.kv))
-        print(f"Uploaded successfully:")
+        print("Uploaded successfully:")
         pprint.pprint(result)
         print(f"\nCID:     {result['cid']}")
         print(f"File ID: {result['id']}")

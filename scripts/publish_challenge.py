@@ -8,7 +8,7 @@ Usage:
     python scripts/publish_challenge.py \
         --spec   challenge_spec.json \
         --wallet-name validator --wallet-hotkey hotkey_0 \
-        --wallet-path /home/luka/ws/bittensor_test/defektr/wallets \
+        --wallet-path /home/your_workspace/wallets \
         --network ws://127.0.0.1:9944
 
     # Update block numbers automatically from the current block:
@@ -79,7 +79,7 @@ def publish(
 
     print(f"Committing CID on-chain (netuid={netuid}) …")
     subtensor.set_commitment(wallet, netuid, cid)
-    print(f"✅ Done. Miners can fetch spec via:")
+    print("Done. Miners can fetch spec via:")
     print(f"   subtensor.get_commitment({netuid}, <validator_uid>)  → {cid}")
     return cid
 

@@ -10,4 +10,4 @@ subtensor.add_stake(
 	netuid=NETUID,
 	amount=bt.Balance.from_tao(100)
 )
-print('✅ Stake added')
+print('OK: Stake added')

@@ -27,7 +27,6 @@ import os
 import random
 import sys
 
-import numpy as np
 import torch
 import torch.nn as nn
 from torch.utils.data import Dataset, DataLoader
@@ -66,7 +65,7 @@ def _collect_samples(mvtec_root: str):
 class BottleDataset(Dataset):
     """MVTec bottle classification dataset with augmentation."""
 
-    # ImageNet normalisation
+    # ImageNet normalization
     MEAN = [0.485, 0.456, 0.406]
     STD  = [0.229, 0.224, 0.225]
 

@@ -7,15 +7,6 @@ One-shot setup for the Defektr hackathon submission:
   - Funds all coldkeys via Alice sudo (top-up to 2000 TAO each)
   - Registers all 13 hotkeys on netuid 3
   - Adds 100 TAO stake to each validator hotkey
-
-Run AFTER the chain is up and subnet is created:
-    python defektr/scripts/setup_hotkeys.py
-
-Or from the project root (bittensor_test/):
-    python defektr/scripts/setup_hotkeys.py
-
-Re-run safely after a Docker restart — hotkeys already on disk are skipped,
-registration is idempotent (burned_register will no-op if already registered).
 """
 
 import sys
@@ -68,7 +59,7 @@ def _fund_coldkey(substrate, address: str, label: str):
     )
     extrinsic = substrate.create_signed_extrinsic(call=sudo_call, keypair=alice)
     receipt   = substrate.submit_extrinsic(extrinsic, wait_for_inclusion=True)
-    status = "✅" if receipt.is_success else f"❌ {receipt.error_message}"
+    status = "OK" if receipt.is_success else f"ERROR {receipt.error_message}"
     print(f"  Fund {label}: {status}")
 
 
@@ -80,18 +71,18 @@ def _register(subtensor, wallet, label: str, max_retries: int = 30):
     Unencrypted coldkeys (e.g. miner2) won't prompt for a password on retries.
     """
     if subtensor.is_hotkey_registered(netuid=NETUID, hotkey_ss58=wallet.hotkey.ss58_address):
-        print(f"  Register {label}: already registered ✅")
+        print(f"  Register {label}: already registered OK")
         return True
 
     for attempt in range(1, max_retries + 1):
         subtensor.burned_register(wallet=wallet, netuid=NETUID)
         time.sleep(2)
         if subtensor.is_hotkey_registered(netuid=NETUID, hotkey_ss58=wallet.hotkey.ss58_address):
-            print(f"  Register {label}: ✅")
+            print(f"  Register {label}: OK")
             return True
         time.sleep(3)  # wait for registration interval to roll over, then retry
 
-    print(f"  Register {label}: ❌  gave up after {max_retries} attempts")
+    print(f"  Register {label}: ERROR,  gave up after {max_retries} attempts")
     return False
 
 
@@ -103,9 +94,9 @@ def _add_stake(subtensor, wallet, label: str):
             netuid        = NETUID,
             amount        = bt.Balance.from_tao(STAKE_TAO),
         )
-        print(f"  Stake {label}: ✅ +{STAKE_TAO} TAO")
+        print(f"  Stake {label}: OK +{STAKE_TAO} TAO")
     except Exception as e:
-        print(f"  Stake {label}: ❌ {e}")
+        print(f"  Stake {label}: ERROR {e}")
 
 
 # ── Main ──────────────────────────────────────────────────────────────────────
@@ -193,7 +184,7 @@ def main():
             stake = float(metagraph.S[uid])
             print(f"  {w.name}/{w.hotkey_str:12s}  uid={uid:3d}  stake={stake:.1f} τ")
         else:
-            print(f"  {w.name}/{w.hotkey_str:12s}  NOT REGISTERED ❌")
+            print(f"  {w.name}/{w.hotkey_str:12s}  NOT REGISTERED")
 
     print("\nDone. Run the full reset after a Docker restart:")
     print("  python defektr/scripts/setup_hotkeys.py")

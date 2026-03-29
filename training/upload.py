@@ -278,7 +278,7 @@ def upload_and_commit(
         data_file = Path(str(model_path) + ".data")
     _merged_tmp = None
     if data_file.exists():
-        print(f"[0/7] Merging external data file into single ONNX …")
+        print("[0/7] Merging external data file into single ONNX …")
         import onnx as _onnx
         _m = _onnx.load(model_path)
         _tmp = tempfile.NamedTemporaryFile(suffix=".onnx", delete=False, prefix="defektr_merged_")
