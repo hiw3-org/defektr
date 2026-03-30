@@ -3,7 +3,7 @@ import bittensor as bt
 logging.getLogger("bittensor").setLevel(logging.CRITICAL)                                                                                                                                                                                                                    
 subtensor = bt.Subtensor(network='wss://test.finney.opentensor.ai')                                                                                                                                                                                   
 wallet = bt.Wallet(name='validator', hotkey='default', path='/home/luka/ws/bittensor_test/defektr/wallets')                                                                                                                                       
-NETUID = 2
+NETUID = 29
 subtensor.add_stake(
 	wallet=wallet,
 	hotkey_ss58=wallet.hotkey.ss58_address,

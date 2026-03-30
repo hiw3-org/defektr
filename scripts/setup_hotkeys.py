@@ -20,12 +20,12 @@ import bittensor as bt
 
 ENDPOINT    = "wss://test.finney.opentensor.ai"
 WALLET_PATH = str(Path(__file__).resolve().parent.parent / "wallets")
-NETUID      = 2
+NETUID      = 29
 FUND_RAO    = 2_000 * 10**9   # 2000 TAO per coldkey
 STAKE_TAO   = 100             # TAO to stake per validator hotkey
 
 VALIDATOR_WALLET = "validator"
-N_VALIDATORS     = 2   # hotkey_0 + hotkey_1; validator/default is registered via register_neurons.py
+N_VALIDATORS     = 3   # hotkey_0, hotkey_1, hotkey_2
 
 # Each miner gets its own coldkey to avoid TxRateLimit (1 registration per coldkey per interval).
 # 5 baseline (mobilenet_v2) + 5 improved (mobilenet_v2_unet), alternating.
@@ -63,12 +63,13 @@ def _fund_coldkey(substrate, address: str, label: str):
     print(f"  Fund {label}: {status}")
 
 
-def _register(subtensor, wallet, label: str, max_retries: int = 30):
+def _register(subtensor, wallet, label: str, max_retries: int = 1200):
     """Register via burned_register, retrying until the interval slot is free.
 
     Custom error 6 = RegistrationsThisInterval >= TargetRegistrationsPerInterval.
-    On a fast devnet the interval resets in seconds — retrying handles it.
-    Unencrypted coldkeys (e.g. miner2) won't prompt for a password on retries.
+    The interval is ~100 blocks (~20 min on testnet) — we retry for up to 10 min
+    per attempt, sleeping 10s between tries so we don't spam the node.
+    Unencrypted coldkeys won't prompt for a password on retries.
     """
     if subtensor.is_hotkey_registered(netuid=NETUID, hotkey_ss58=wallet.hotkey.ss58_address):
         print(f"  Register {label}: already registered OK")
@@ -80,7 +81,9 @@ def _register(subtensor, wallet, label: str, max_retries: int = 30):
         if subtensor.is_hotkey_registered(netuid=NETUID, hotkey_ss58=wallet.hotkey.ss58_address):
             print(f"  Register {label}: OK")
             return True
-        time.sleep(3)  # wait for registration interval to roll over, then retry
+        if attempt % 12 == 0:
+            print(f"  Register {label}: waiting for interval reset … (attempt {attempt}/{max_retries})")
+        time.sleep(10)  # wait for registration interval to roll over, then retry
 
     print(f"  Register {label}: ERROR,  gave up after {max_retries} attempts")
     return False
@@ -105,6 +108,8 @@ def main():
     parser = argparse.ArgumentParser(description="Defektr hotkey setup")
     parser.add_argument("--miners", type=int, default=10,
                         help="Number of miners to create/register (0–10, default 10)")
+    parser.add_argument("--skip-funding", action="store_true",
+                        help="Skip Alice sudo funding step (use on testnet)")
     args = parser.parse_args()
 
     n_miners = max(0, min(10, args.miners))
@@ -143,20 +148,21 @@ def main():
         validator_wallets.append(w)
 
     # ── Step 2: Fund coldkeys ─────────────────────────────────────────────────
-    # Fund each unique coldkey once (multiple hotkeys sharing a coldkey get one fund).
-    print(f"\n[2/4] Funding coldkeys ({FUND_RAO // 10**9} TAO each) …")
-    funded = set()
-    for w in miner_wallets:
-        ck = w.coldkeypub.ss58_address
-        if ck not in funded:
-            _fund_coldkey(substrate, ck, f"{w.name} coldkey ({ck[:8]}…)")
-            funded.add(ck)
-    val_coldkey = bt.Wallet(name=VALIDATOR_WALLET, path=WALLET_PATH).coldkeypub.ss58_address
-    if val_coldkey not in funded:
-        _fund_coldkey(substrate, val_coldkey, f"validator coldkey ({val_coldkey[:8]}…)")
-        funded.add(val_coldkey)
-
-    time.sleep(2)  # Let balances settle
+    if args.skip_funding:
+        print(f"\n[2/4] Skipping funding (--skip-funding) — fund coldkeys manually via btcli wallet transfer")
+    else:
+        print(f"\n[2/4] Funding coldkeys ({FUND_RAO // 10**9} TAO each) …")
+        funded = set()
+        for w in miner_wallets:
+            ck = w.coldkeypub.ss58_address
+            if ck not in funded:
+                _fund_coldkey(substrate, ck, f"{w.name} coldkey ({ck[:8]}…)")
+                funded.add(ck)
+        val_coldkey = bt.Wallet(name=VALIDATOR_WALLET, path=WALLET_PATH).coldkeypub.ss58_address
+        if val_coldkey not in funded:
+            _fund_coldkey(substrate, val_coldkey, f"validator coldkey ({val_coldkey[:8]}…)")
+            funded.add(val_coldkey)
+        time.sleep(2)  # Let balances settle
 
     # ── Step 3: Register all hotkeys ─────────────────────────────────────────
     print(f"\n[3/4] Registering {len(miner_wallets)} miner + {N_VALIDATORS} validator hotkeys on netuid {NETUID} …")

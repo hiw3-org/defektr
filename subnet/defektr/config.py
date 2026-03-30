@@ -6,7 +6,7 @@
 # Chain
 # ---------------------------------------------------------------------------
 
-NETUID = 2  # update after subnet registration on testnet — assigned dynamically
+NETUID = 29  # testnet
 
 # How often set_weights() is called (standard Bittensor tempo, in blocks).
 EPOCH_TEMPO = 100    # ≈ 20 min on testnet/mainnet  (3 = fast localnet)

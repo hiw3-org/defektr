@@ -4,7 +4,7 @@ logging.getLogger("bittensor").setLevel(logging.CRITICAL)
 
 ENDPOINT = "wss://test.finney.opentensor.ai"
 WALLET_PATH = "/home/luka/ws/bittensor_test/defektr/wallets" # Update this to your wallets directory if different
-NETUID = 2
+NETUID = 29
 
 subtensor = bt.Subtensor(network=ENDPOINT)
 

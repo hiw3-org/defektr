@@ -70,10 +70,9 @@ The improved model's U-Net decoder unlocks the localisation component of the acc
 
 ## Prerequisites
 
-- Docker
 - Python 3.12
-- `uv` package manager
 - Pinata account with API key + dedicated gateway (for IPFS model uploads)
+- A funded wallet on the target network (testnet or mainnet)
 
 ### Environment file
 
@@ -89,151 +88,194 @@ Get the gateway from: Pinata dashboard → Gateways tab → create a dedicated g
 ### Python environment
 
 ```bash
-cd /your_workspace
-uv venv .venv --python 3.12
-source .venv/bin/activate
-uv pip install -r defektr/requirements.txt
+pip install -r requirements.txt
 ```
 
 ---
 
-## Running the Full Demo
+## Configuration — Files to Update When Changing Network or UIDs
 
-### Step 1 — Start the local Bittensor chain
+When deploying to a different network or after a chain reset (netuid may change), update the following files:
+
+### RPC endpoint
+
+The testnet RPC (`wss://test.finney.opentensor.ai`) is hardcoded in these files — change all of them to your target endpoint:
+
+| File | Variable/argument |
+|------|----------|
+| `scripts/setup_hotkeys.py` | `ENDPOINT` |
+| `scripts/register_neurons.py` | `ENDPOINT` |
+| `scripts/add_stake.py` | `network=` in `bt.Subtensor(...)` |
+| `scripts/publish_challenge.py` | `--network` default argument |
+| `scripts/run_validator.sh` | `NETWORK` default (line 3) |
+| `scripts/run_miner.sh` | `NETWORK` default (line 3) |
+
+For **localnet**, replace `wss://test.finney.opentensor.ai` with `ws://127.0.0.1:9944`.
+
+### Netuid
+
+After registering a new subnet (netuid may differ), update `NETUID` in:
+
+| File | Variable |
+|------|----------|
+| `subnet/defektr/config.py` | `NETUID` — used by all validator/protocol code |
+| `scripts/setup_hotkeys.py` | `NETUID` — used for registration and staking |
+| `scripts/register_neurons.py` | `NETUID` |
+| `scripts/add_stake.py` | `NETUID` |
+
+### Wallet paths
+
+The wallet path defaults to `defektr/wallets/` (project-local). If you store wallets elsewhere, pass `--wallet-path <path>` at runtime or update the `WALLET_PATH` constant in each script.
+
+---
+
+## Running the Demo on Testnet (wss://test.finney.opentensor.ai)
+
+Current live deployment on **netuid 29**.
+
+### Step 1 — Fund wallets
+
+Get test TAO from the Bittensor faucet, then transfer to your miner coldkeys:
 
 ```bash
-
-docker run -d --name local_chain -p 9944-9945:9944-9945 ghcr.io/opentensor/subtensor-localnet:devnet-ready
+btcli wallet transfer --wallet.name owner --wallet.path wallets \
+    --dest <miner_coldkey_address> --amount 1000 \
+    --subtensor.network wss://test.finney.opentensor.ai
 ```
 
+### Step 2 — Register your subnet
 
-### Step 2 — Chain reset (run after every Docker restart)
+Subnet registration costs ~1000 TAO (burn). After registration a 720-block cooldown applies globally before another subnet can be registered on the same network.
 
 ```bash
-cd /home/luka/ws/bittensor_test
-source .venv/bin/activate
-
-python scripts/fund_wallets.py      # Alice sudo → 2000 TAO to owner/miner/validator
-python scripts/setup_subnet.py      # creates subnet → netuid 2
-python scripts/register_neurons.py  # registers validator/default on netuid 2
-python scripts/add_stake.py         # stakes 100 TAO to validator/default
+python scripts/setup_subnet.py
 ```
 
-Or as a one-liner:
+Note the netuid returned and update `NETUID` in `subnet/defektr/config.py` and `scripts/setup_hotkeys.py` if it differs from 29.
+
+### Step 3 — Create and register hotkeys
+
+`--skip-funding` skips the Alice sudo step (which only works on localnet):
 
 ```bash
-python scripts/fund_wallets.py && python scripts/setup_subnet.py && python scripts/register_neurons.py && python scripts/add_stake.py
+# 2 miners (baseline + improved) + 1 validator
+python scripts/setup_hotkeys.py --miners 2 --skip-funding
+
+# 3 miners (adds a copy miner for copy-detection demo)
+python scripts/setup_hotkeys.py --miners 3 --skip-funding
 ```
 
-### Step 3 — Create and register miner/validator hotkeys
+This creates wallets, registers all hotkeys on the subnet, and stakes the validator hotkey.
+
+### Step 4 — Upload models to IPFS
 
 ```bash
-# For the copy-detection demo (3 miners: baseline + improved + copy)
-python scripts/setup_hotkeys.py --miners 3
-
-# For a larger demo (up to 10 miners)
-python scripts/setup_hotkeys.py --miners 10
-```
-
-The metagraph layout after setup:
-- uid=0 — subnet owner
-- uid=1 — validator/default
-- uid=2 — miner/hotkey_0 (baseline)
-- uid=3 — miner2/default (improved)
-- uid=4 — miner3/default (baseline, copy — for copy-detection demo)
-- ...
-- uid=N+1 — validator/hotkey_0
-- uid=N+2 — validator/hotkey_1
-
-### Step 4 — Upload models to IPFS (requires internet)
-
-```bash
-export WALLETS=/home/your_folder/wallets
+export WALLETS=/path/to/defektr/wallets
 
 # Miner 1 — baseline model
 python training/upload.py \
     --model training/models/baseline.onnx \
     --spec challenge_spec.json \
     --wallet-name miner --wallet-hotkey hotkey_0 \
-    --wallet-path $WALLETS \
-    --architecture mobilenet_v2
+    --wallet-path $WALLETS --architecture mobilenet_v2
 
 # Miner 2 — improved model (MobileNetV2 + U-Net)
 python training/upload.py \
     --model training/models/improved.onnx \
     --spec challenge_spec.json \
     --wallet-name miner2 --wallet-hotkey default \
-    --wallet-path $WALLETS \
-    --architecture mobilenet_v2_unet
+    --wallet-path $WALLETS --architecture mobilenet_v2_unet
 
 # Miner 3 — copy of baseline (triggers copy detection)
 python training/upload.py \
     --model training/models/baseline.onnx \
     --spec challenge_spec.json \
     --wallet-name miner3 --wallet-hotkey default \
-    --wallet-path $WALLETS \
-    --architecture mobilenet_v2
+    --wallet-path $WALLETS --architecture mobilenet_v2
 ```
 
-Each upload: validates model → checks edge deployability → computes SHA-256 → uploads model.onnx to IPFS → uploads metadata.json to IPFS → commits metadata CID on-chain.
+> **Note:** The miner hotkey needs stake on the root network (netuid 0) for `set_commitment()` to work. If you get `AccountNotAllowedCommit`, run:
+> ```bash
+> btcli stake add --wallet.name miner --wallet.hotkey hotkey_0 \
+>     --wallet.path wallets --netuid 0 --amount 10 \
+>     --subtensor.network wss://test.finney.opentensor.ai
+> ```
 
-### Step 5 — Run the validator
+### Step 5 — Publish challenge spec
 
 ```bash
-export WALLETS=/home/your_folder/wallets
-
-python subnet/neurons/validator.py \
-    --netuid 2 \
-    --subtensor.network ws://127.0.0.1:9944 \
-    --wallet.name validator --wallet.hotkey default \
-    --wallet.path $WALLETS \
-    --defektr.spec challenge_spec.json \
-    --defektr.val_dataset data/datasets/bottle \
-    --logging.debug
+python scripts/publish_challenge.py --spec challenge_spec.json --update-blocks
 ```
 
-Expected validator output every epoch (~3 blocks on localnet):
+Uploads `challenge_spec.json` to IPFS and commits the CID on-chain from `validator/hotkey_0`. The `--update-blocks` flag auto-sets `challenge_block` and `deadline_block` relative to the current block.
+
+### Step 6 — Run the validator
+
+```bash
+bash scripts/run_validator.sh hotkey_0 wss://test.finney.opentensor.ai /path/to/defektr/wallets
+```
+
+Logs are saved to `logs/validator_hotkey_0_<timestamp>.log`.
+
+Expected output every epoch (~100 blocks ≈ 20 min on testnet):
 
 ```
-[uid 2] score=0.7999  latency=6.2ms  outputs=1 (bin)
-[uid 3] score=0.8766  latency=25.8ms  outputs=2 (seg)
-[uid 4] score=0.7999  latency=6.1ms  outputs=1 (bin)
-[copy-detection] uid=4 score=0.7999 matches uid=2 score=0.7999 (diff=0.0000) — uid=4 penalized to 0
-Scores this epoch: uid=3 0.8766  uid=2 0.7999  uid=0 0.0000  uid=1 0.0000  uid=4 0.0000
+[uid 1] score=0.7999  latency=6.2ms  outputs=1 (bin)
+[uid 2] score=0.8766  latency=25.8ms  outputs=2 (seg)
+[uid 3] score=0.7999  latency=6.1ms  outputs=1 (bin)
+[copy-detection] uid=3 score=0.7999 matches uid=1 score=0.7999 (diff=0.0000) — uid=3 penalized to 0
+Scores this epoch: uid=2 0.8766  uid=1 0.7999  uid=3 0.0000
 set_weights on chain successfully!
 ```
 
-To run additional validators (for multi-validator Yuma consensus demo):
+### Step 7 — Run miners (for incentive logging)
 
 ```bash
-# Validator hotkey_0
-python subnet/neurons/validator.py --netuid 2 --subtensor.network ws://127.0.0.1:9944 \
-    --wallet.name validator --wallet.hotkey hotkey_0 --wallet.path $WALLETS \
-    --defektr.spec challenge_spec.json --defektr.val_dataset data/datasets/bottle --logging.debug
+# Baseline miner
+bash scripts/run_miner.sh miner hotkey_0 wss://test.finney.opentensor.ai /path/to/defektr/wallets
 
-# Validator hotkey_1
-python subnet/neurons/validator.py --netuid 2 --subtensor.network ws://127.0.0.1:9944 \
-    --wallet.name validator --wallet.hotkey hotkey_1 --wallet.path $WALLETS \
-    --defektr.spec challenge_spec.json --defektr.val_dataset data/datasets/bottle --logging.debug
+# Improved miner
+bash scripts/run_miner.sh miner2 default wss://test.finney.opentensor.ai /path/to/defektr/wallets
 ```
 
-### Step 6 — Run miners (optional, for incentive logging)
+---
+
+## Running the Demo Locally (ws://127.0.0.1:9944)
+
+### Step 1 — Start the local Bittensor chain
 
 ```bash
-export WALLETS=/home/your_folder/wallets
-
-python subnet/neurons/miner.py --netuid 2 --subtensor.network ws://127.0.0.1:9944 \
-    --wallet.name miner --wallet.hotkey hotkey_0 --wallet.path $WALLETS --logging.debug
-
-python subnet/neurons/miner.py --netuid 2 --subtensor.network ws://127.0.0.1:9944 \
-    --wallet.name miner2 --wallet.hotkey default --wallet.path $WALLETS --logging.debug
+docker run -d --name local_chain -p 9944-9945:9944-9945 ghcr.io/opentensor/subtensor-localnet:devnet-ready
+# or start existing:
+docker start local_chain
 ```
 
-### Utility commands
+### Step 2 — Chain reset (run after every Docker restart)
+
+```bash
+python scripts/fund_wallets.py      # Alice sudo → 2000 TAO to owner/miner/validator
+python scripts/setup_subnet.py      # creates subnet → netuid 2
+python scripts/register_neurons.py  # registers validator/default on netuid 2
+python scripts/add_stake.py         # stakes 100 TAO to validator/default
+```
+
+### Step 3 — Create and register hotkeys
+
+```bash
+python scripts/setup_hotkeys.py --miners 3   # funds via Alice sudo, no --skip-funding needed
+```
+
+### Steps 4–7
+
+Same as testnet steps 4–7 above, replacing the network argument with `ws://127.0.0.1:9944`.
+
+---
+
+## Utility Commands
 
 ```bash
 # Check all registered UIDs, incentives, and stakes
-python scripts/show_metagraph.py 2>/dev/null
+python scripts/show_metagraph.py
 
 # Generate model output comparison image (baseline vs improved)
 python scripts/visualize_models.py --out model_comparison.png
@@ -245,6 +287,7 @@ python scripts/visualize_models.py \
 ```
 
 ---
+
 ## Protocol Details
 
 ### What miners commit on-chain

@@ -23,6 +23,7 @@ from copy import deepcopy
 
 _ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(_ROOT))
+sys.path.insert(0, str(_ROOT / "subnet"))
 
 import bittensor as bt
 from data import ipfs
