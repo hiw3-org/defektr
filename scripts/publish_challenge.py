@@ -93,7 +93,7 @@ if __name__ == "__main__":
     p.add_argument("--wallet-name",     default="validator")
     p.add_argument("--wallet-hotkey",   default="hotkey_0")
     p.add_argument("--wallet-path",     default="/home/luka/ws/bittensor_test/defektr/wallets")
-    p.add_argument("--network",         default="ws://127.0.0.1:9944")
+    p.add_argument("--network",         default="wss://test.finney.opentensor.ai")
     p.add_argument("--netuid",          type=int, default=NETUID)
     p.add_argument("--update-blocks",   action="store_true",
                    help="Auto-update challenge_block and deadline_block from current block.")

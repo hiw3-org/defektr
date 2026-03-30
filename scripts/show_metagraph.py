@@ -1,7 +1,11 @@
 import bittensor as bt
+import sys
 
-s = bt.Subtensor(network="ws://127.0.0.1:9944")
-m = s.metagraph(2)
+sys.path.insert(0, str(__import__("pathlib").Path(__file__).resolve().parent.parent / "subnet"))
+from defektr.config import NETUID
+
+s = bt.Subtensor(network="wss://test.finney.opentensor.ai")
+m = s.metagraph(NETUID)
 print(f"{'UID':<5} {'hotkey':<50} {'incentive':<12} {'stake':<12}")
 print("-" * 80)
 for uid in range(len(m.hotkeys)):
