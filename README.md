@@ -1,5 +1,7 @@
 # Defektr — Subnet for Manufacturing Visual Quality Control
 
+<img src="media/DefektrLogo.png" alt="Defektr Logo" width="400" />
+
 Defektr is a Bittensor subnet that produces edge-deployable AI models for manufacturing visual defect detection. Miners compete to build the best defect detection models, validators evaluate them on real benchmark images, and factories purchase the top-performing models.
 
 **Hackathon:** Bittensor Subnet Ideathon — Round 2
