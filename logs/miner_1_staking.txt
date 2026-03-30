@@ -1,0 +1,37 @@
+(.venv) [luka@luka-arch defektr]$ btcli stake add --wallet.name miner --wallet.hotkey hotkey_0 --wallet.path /home/luka/ws/bittensor_test/defektr/wallets --subtensor.network wss://test.finney.opentensor.ai --amount 10
+Safe staking: enabled (from config).
+Rate tolerance: 0.005 (0.5%) by default. Set this using `btcli config set` or `--tolerance` flag
+Partial staking: disabled (from config).
+Enter the netuid to use. Leave blank for all netuids: 0
+                                                                                                                                                                                            
+                                                                                        Staking to:                                                                                         
+                                                       Wallet: miner, Coldkey ss58: 5E573Qv4D9JW6UniETaQ3wtX1LXT8UwG7dWMQ3EPxaszw5oS                                                        
+                                                                                      Network: custom                                                                                       
+                                                                                                                                                                                            
+ Netuid ┃                      Hotkey                      ┃ Amount (τ) ┃ Rate (per τ) ┃ Est. Received ┃ Fee (τ)  ┃ Extrinsic Fee (τ) ┃ Rate with tolerance: (0.5%) ┃ Partial stake enabled 
+━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━
+   0    │ 5FgaWfysRzLHcwCnNsY1SHscn4tzRbPCrCatNWUPdq87MPt3 │ ‎10.0000 τ‎  │   1.0 Τ/Τ    │   Τ 9.9987    │ Τ 0.0000 │     ‎0.0013 τ‎      │            1 Τ/Τ            │         False         
+────────┼──────────────────────────────────────────────────┼────────────┼──────────────┼───────────────┼──────────┼───────────────────┼─────────────────────────────┼───────────────────────
+        │                                                  │            │              │               │          │                   │                             │                       
+
+Description:
+The table displays information about the stake operation you are about to perform.
+The columns are as follows:
+    - Netuid: The netuid of the subnet you are staking to.
+    - Hotkey: The ss58 address of the hotkey you are staking to. 
+    - Amount: The TAO you are staking into this subnet onto this hotkey.
+    - Rate: The rate of exchange between your TAO and the subnet's stake.
+    - Received: The amount of stake you will receive on this subnet after slippage.
+    - Rate Tolerance: Maximum acceptable alpha rate. If the rate exceeds this tolerance, the transaction will be limited or rejected.
+    - Partial staking: If True, allows staking up to the rate tolerance limit. If False, the entire transaction will fail if rate tolerance is exceeded.
+
+Would you like to continue? [y/n] (n): y
+Enter your password: 
+Decrypting...
+✅ Your extrinsic has been included as 6799427-7
+✅ Finalized. Stake added to netuid: 0
+
+Balance:
+  ‎199.8973 τ‎ ➡ ‎189.8958 τ‎
+Subnet: 0 Stake:
+  ‎0.0000 τ‎ ➡ Τ 10.0000

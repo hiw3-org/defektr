@@ -1,0 +1,303 @@
+[34m2026-03-30 22:21:31.977[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:loggingmachine.py:480 | Debug enabled.
+full path: /home/luka/.bittensor/miners/validator/hotkey_0/netuid29/validator
+[34m2026-03-30 22:21:32.308[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:loggingmachine.py:467 | Enabling debug.
+[34m2026-03-30 22:21:32.308[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:loggingmachine.py:480 | Debug enabled.
+[34m2026-03-30 22:21:32.313[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:neuron.py:75 | axon:
+  port: 8091
+  ip: '[::]'
+  external_port: null
+  external_ip: null
+  max_workers: 10
+logging:
+  debug: true
+  trace: false
+  info: false
+  record_log: false
+  logging_dir: /home/luka/.bittensor/miners
+  enable_third_party_loggers: false
+priority:
+  max_workers: 5
+  maxsize: 10
+subtensor:
+  chain_endpoint: wss://entrypoint-finney.opentensor.ai:443
+  network: wss://test.finney.opentensor.ai
+  _mock: false
+wallet:
+  name: validator
+  hotkey: hotkey_0
+  path: /home/luka/ws/bittensor_test/defektr/wallets
+config: false
+strict: false
+no_version_checking: false
+netuid: 29
+neuron:
+  axon:
+    port: 8091
+    ip: '[::]'
+    external_port: null
+    external_ip: null
+    max_workers: 10
+  logging:
+    debug: false
+    trace: false
+    info: false
+    record_log: false
+    logging_dir: /home/luka/.bittensor/miners
+    enable_third_party_loggers: false
+  priority:
+    max_workers: 5
+    maxsize: 10
+  subtensor:
+    chain_endpoint: wss://entrypoint-finney.opentensor.ai:443
+    network: finney
+    _mock: false
+  wallet:
+    name: default
+    hotkey: default
+    path: /home/luka/.bittensor/wallets
+  config: false
+  strict: false
+  no_version_checking: false
+  device: cuda
+  epoch_length: 100
+  events_retention_size: 2147483648
+  dont_save_events: false
+  name: validator
+  timeout: 10
+  num_concurrent_forwards: 1
+  sample_size: 50
+  disable_set_weights: false
+  moving_average_alpha: 0.1
+  axon_off: false
+  vpermit_tao_limit: 4096
+  full_path: /home/luka/.bittensor/miners/validator/hotkey_0/netuid29/validator
+mock: false
+wandb:
+  axon:
+    port: 8091
+    ip: '[::]'
+    external_port: null
+    external_ip: null
+    max_workers: 10
+  logging:
+    debug: false
+    trace: false
+    info: false
+    record_log: false
+    logging_dir: /home/luka/.bittensor/miners
+    enable_third_party_loggers: false
+  priority:
+    max_workers: 5
+    maxsize: 10
+  subtensor:
+    chain_endpoint: wss://entrypoint-finney.opentensor.ai:443
+    network: finney
+    _mock: false
+  wallet:
+    name: default
+    hotkey: default
+    path: /home/luka/.bittensor/wallets
+  config: false
+  strict: false
+  no_version_checking: false
+  'off': false
+  offline: false
+  notes: ''
+  project_name: template-validators
+  entity: opentensor-dev
+defektr:
+  axon:
+    port: 8091
+    ip: '[::]'
+    external_port: null
+    external_ip: null
+    max_workers: 10
+  logging:
+    debug: false
+    trace: false
+    info: false
+    record_log: false
+    logging_dir: /home/luka/.bittensor/miners
+    enable_third_party_loggers: false
+  priority:
+    max_workers: 5
+    maxsize: 10
+  subtensor:
+    chain_endpoint: wss://entrypoint-finney.opentensor.ai:443
+    network: finney
+    _mock: false
+  wallet:
+    name: default
+    hotkey: default
+    path: /home/luka/.bittensor/wallets
+  config: false
+  strict: false
+  no_version_checking: false
+  spec: scripts/../challenge_spec.json
+  val_dataset: scripts/../data/datasets/bottle
+[34m2026-03-30 22:21:32.313[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:neuron.py:79 | Setting up bittensor objects.
+[34m2026-03-30 22:21:32.314[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:subtensor.py:234 | Connecting to network: [34mtest[0m, chain_endpoint: [34mwss://test.finney.opentensor.ai:443[0m> ...
+[34m2026-03-30 22:21:34.624[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:neuron.py:95 | Wallet: Wallet (Name: 'validator', Hotkey: 'hotkey_0', Path: '/home/luka/ws/bittensor_test/defektr/wallets')
+[34m2026-03-30 22:21:34.624[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:neuron.py:96 | Subtensor: Network: test, Chain: wss://test.finney.opentensor.ai:443
+[34m2026-03-30 22:21:34.624[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:neuron.py:97 | Metagraph: metagraph(netuid:29, n:4, block:6799489, network:test)
+[34m2026-03-30 22:21:34.729[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:neuron.py:106 | Running neuron on subnet: 29 with uid 3 using network: wss://test.finney.opentensor.ai:443
+[34m2026-03-30 22:21:34.733[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:validator.py:63 | Dendrite: dendrite(5D7BwrkXdaV1inaRzUHhaNtDjN6nDdF1xuvuUeN7UpNQTRz9)
+[34m2026-03-30 22:21:34.733[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:validator.py:66 | Building validation weights.
+[34m2026-03-30 22:21:34.890[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:validator.py:288 | resync_metagraph()
+[34m2026-03-30 22:21:35.527[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:validator.py:368 | Saving validator state.
+[34m2026-03-30 22:21:35.528[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:validator.py:90 | serving ip to chain...
+[34m2026-03-30 22:21:35.540[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:serving.py:87 | Checking axon ...
+[34m2026-03-30 22:21:35.753[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:serving.py:97 | Serving axon with: [34mAxonInfo(5D7BwrkXdaV1inaRzUHhaNtDjN6nDdF1xuvuUeN7UpNQTRz9, 127.0.0.1:8091)[0m -> [32mtest:29[0m
+[34m2026-03-30 22:21:35.806[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:subtensor.py:4764 | Composing GenericCall -> SubtensorModule.serve_axon with params: {'netuid': 29, 'version': 10001000, 'ip': 2130706433, 'port': 8091, 'ip_type': 4, 'protocol': 4, 'placeholder1': 0, 'placeholder2': 0}.
+[34m2026-03-30 22:21:36.435[39m | [1m[31m ERROR  [39m[49m[0m | bittensor:validator.py:35 | [31mSubtensor returned `SubstrateRequestException(Invalid Transaction)` error. This means: `Custom error: 11 | Please consult https://docs.bittensor.com/errors/custom`.[0m
+[34m2026-03-30 22:21:36.436[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:validator.py:99 | Running validator Axon([::], 8091, 5D7BwrkXdaV1inaRzUHhaNtDjN6nDdF1xuvuUeN7UpNQTRz9, stopped, ['Synapse']) on network: wss://entrypoint-finney.opentensor.ai:443 with netuid: 29
+[34m2026-03-30 22:21:36.436[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:validator.py:79 | Defektr validator initialised.
+[34m2026-03-30 22:21:36.436[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:validator.py:80 | Challenge spec : scripts/../challenge_spec.json
+[34m2026-03-30 22:21:36.436[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:validator.py:81 | Val dataset    : scripts/../data/datasets/bottle
+[34m2026-03-30 22:21:36.436[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:validator.py:380 | Loading validator state.
+[34m2026-03-30 22:21:36.437[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:validator.py:180 | Starting validator in background thread.
+[34m2026-03-30 22:21:36.437[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:validator.py:185 | Started
+[34m2026-03-30 22:21:36.437[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:validator.py:98 | Validator running | block=6799489 step=0 cached_models=0
+[34m2026-03-30 22:21:36.544[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:validator.py:288 | resync_metagraph()
+[34m2026-03-30 22:21:37.157[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:validator.py:368 | Saving validator state.
+[34m2026-03-30 22:21:37.157[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:validator.py:142 | Validator starting at block: 6799489
+[34m2026-03-30 22:21:37.158[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:validator.py:147 | step(0) block(6799489)
+[34m2026-03-30 22:21:37.158[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:forward.py:175 | Scoring 3 miners at block 6799489
+[34m2026-03-30 22:21:38.675[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:validator_fetch.py:106 | [uid 1] New metadata CID bafkreifsqpuiwj4bn63cojvhvqvctazpce3aw5cd4rnze6k23hb2fk3wwu — downloading …
+[34m2026-03-30 22:21:38.682[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:validator_fetch.py:48 | [uid 1] Downloading metadata CID bafkreifsqpuiwj4bn63cojvhvqvctazpce3aw5cd4rnze6k23hb2fk3wwu …
+[34m2026-03-30 22:21:39.233[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:validator_fetch.py:66 | [uid 1] Downloading model CID bafybeifii2r2pnsu3otfv6osom6vqulsbe2t7tlpl4q3bhtsl6fvgyhb2u …
+[34m2026-03-30 22:21:40.345[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:validator_fetch.py:106 | [uid 2] New metadata CID bafkreidxzsblo4xrf27vrx5celevsyehxokuebt76vnh7n7zy6vjsookce — downloading …
+[34m2026-03-30 22:21:40.345[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:validator_fetch.py:48 | [uid 2] Downloading metadata CID bafkreidxzsblo4xrf27vrx5celevsyehxokuebt76vnh7n7zy6vjsookce …
+[34m2026-03-30 22:21:40.606[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:validator_fetch.py:66 | [uid 2] Downloading model CID bafybeiasdaias5tkucoruwtutuwqr6ah6s3rj6ot432kprzkcpvrj5dsuu …
+[34m2026-03-30 22:21:41.484[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:forward.py:209 | Benchmark: 83 images (seed='0x127b0f2ba619fe921e225a1ad1b5edb44333d88e90650a6bf977aa9951c668c1')
+[34m2026-03-30 22:21:41.484[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:forward.py:220 | [uid 0] no model cached — score 0
+[34m2026-03-30 22:21:43.251[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:forward.py:127 | [uid 1] score=0.7999  latency=6.1ms  outputs=1 (bin)
+[34m2026-03-30 22:21:46.597[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:forward.py:127 | [uid 2] score=0.8766  latency=25.6ms  outputs=2 (seg)
+[34m2026-03-30 22:21:46.598[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:validator.py:356 | Scattered rewards: [0.         0.79987687 0.8765728 ]
+[34m2026-03-30 22:21:46.599[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:validator.py:364 | Updated moving avg scores: [0.         0.07998769 0.08765728 0.        ]
+[34m2026-03-30 22:21:46.599[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:forward.py:253 | Scores this epoch: uid=2 0.8766  uid=1 0.7999  uid=0 0.0000
+[34m2026-03-30 22:21:46.704[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:validator.py:288 | resync_metagraph()
+[34m2026-03-30 22:21:47.098[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:validator.py:368 | Saving validator state.
+[34m2026-03-30 22:21:47.149[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:validator.py:147 | step(1) block(6799490)
+[34m2026-03-30 22:21:47.149[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:forward.py:175 | Scoring 3 miners at block 6799490
+[34m2026-03-30 22:21:48.441[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:validator.py:98 | Validator running | block=6799490 step=1 cached_models=2
+[34m2026-03-30 22:21:48.743[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:forward.py:209 | Benchmark: 83 images (seed='0x127b0f2ba619fe921e225a1ad1b5edb44333d88e90650a6bf977aa9951c668c1')
+[34m2026-03-30 22:21:48.743[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:forward.py:220 | [uid 0] no model cached — score 0
+[34m2026-03-30 22:21:50.498[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:forward.py:127 | [uid 1] score=0.7999  latency=6.1ms  outputs=1 (bin)
+[34m2026-03-30 22:21:53.876[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:forward.py:127 | [uid 2] score=0.8766  latency=25.6ms  outputs=2 (seg)
+[34m2026-03-30 22:21:53.878[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:validator.py:356 | Scattered rewards: [0.         0.79987687 0.8765728 ]
+[34m2026-03-30 22:21:53.878[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:validator.py:364 | Updated moving avg scores: [0.         0.15197662 0.16654883 0.        ]
+[34m2026-03-30 22:21:53.878[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:forward.py:253 | Scores this epoch: uid=2 0.8766  uid=1 0.7999  uid=0 0.0000
+[34m2026-03-30 22:21:54.088[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:validator.py:288 | resync_metagraph()
+[34m2026-03-30 22:21:54.536[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:validator.py:245 | [0.         0.47712553 0.52287453 0.        ] - raw_weights
+[34m2026-03-30 22:21:54.536[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:validator.py:246 | [0, 1, 2, 3] - raw_weight_uids
+[34m2026-03-30 22:21:54.536[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:weight_utils.py:152 | process_weights_for_netuid()
+[34m2026-03-30 22:21:54.536[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:weight_utils.py:153 | [0.         0.47712553 0.52287453 0.        ] - weights
+[34m2026-03-30 22:21:54.536[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:weight_utils.py:154 | 29 - netuid
+[34m2026-03-30 22:21:54.537[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:weight_utils.py:155 | Network: test, Chain: wss://test.finney.opentensor.ai:443 - subtensor
+[34m2026-03-30 22:21:54.537[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:weight_utils.py:156 | metagraph(netuid:29, n:4, block:6799491, network:test) - metagraph
+[34m2026-03-30 22:21:54.953[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:weight_utils.py:171 | 0.0 - quantile
+[34m2026-03-30 22:21:54.953[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:weight_utils.py:172 | 1 - min_allowed_weights
+[34m2026-03-30 22:21:54.953[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:weight_utils.py:173 | 1.0 - max_weight_limit
+[34m2026-03-30 22:21:54.954[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:weight_utils.py:200 | [0.47712553 0.52287453] - non_zero_weights
+[34m2026-03-30 22:21:54.974[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:weight_utils.py:208 | 0.5 - max_exclude
+[34m2026-03-30 22:21:54.974[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:weight_utils.py:209 | 0.0 - exclude_quantile
+[34m2026-03-30 22:21:54.974[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:weight_utils.py:210 | 0.47712553 - lowest_quantile
+[34m2026-03-30 22:21:54.975[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:weight_utils.py:217 | [1 2] - non_zero_weight_uids
+[34m2026-03-30 22:21:54.975[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:weight_utils.py:218 | [0.47712553 0.52287453] - non_zero_weights
+[34m2026-03-30 22:21:54.975[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:weight_utils.py:224 | [0.47712553 0.52287453] - final_weights
+[34m2026-03-30 22:21:54.975[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:validator.py:258 | [0.47712553 0.52287453] - processed_weights
+[34m2026-03-30 22:21:54.975[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:validator.py:259 | [1 2] - processed_weight_uids
+[34m2026-03-30 22:21:54.975[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:weight_utils.py:83 | weights: [0.47712553 0.52287453]
+[34m2026-03-30 22:21:54.975[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:weight_utils.py:84 | non_zero_weights: [0.47712553 0.52287453]
+[34m2026-03-30 22:21:54.975[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:weight_utils.py:85 | uids: [1 2]
+[34m2026-03-30 22:21:54.975[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:weight_utils.py:86 | non_zero_weight_uids: [1 2]
+[34m2026-03-30 22:21:54.975[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:weight_utils.py:112 | setting on chain max: 0.5228745341300964 and weights: [0.9125048062788896, 1.0]
+[34m2026-03-30 22:21:54.975[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:weight_utils.py:127 | final params: [np.int64(1), np.int64(2)] : [59801, 65535]
+[34m2026-03-30 22:21:54.975[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:validator.py:268 | [59801, 65535] - uint_weights
+[34m2026-03-30 22:21:54.975[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:validator.py:269 | [np.int64(1), np.int64(2)] - uint_uids
+[34m2026-03-30 22:21:55.657[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:subtensor.py:7219 | Committing weights [59801, 65535] for subnet [34m29[0m. Attempt [34m1[34m of [32m5[0m.
+[34m2026-03-30 22:21:55.825[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:subtensor.py:4764 | Composing GenericCall -> SubtensorModule.commit_timelocked_mechanism_weights with params: {'netuid': 29, 'mecid': 0, 'commit': b'\xac\x177\xb1\x1b\x93\xaf\xb9\x1b\x9d\x1f\x1f\r\xe9\xd3\x890\xe3\x19\x9f\x14\xa2m\xf7\xf7.e#\xbc\xd6+\xb1O\xf8I\x8a\xdc\xf5\xdcv:\xeb1\xcc<3b\x8c\x014\x9b\x16s\xccF\x99\x08\xd1X\xb6\x06j\xdf)VR0\xb2\xd9\xa6\x0c\x86\xf1_\\\xe7\xa9\x03"\xbb ]\x9dd\x05\xd4\x8c\x19\xb0\t_\xa9\xef\xb9\xac\x14 \x00\x00\x00\x00\x00\x00\x00\xa3\xd3-\xa2\xc0\xa7\xe7\xefa\xd4\x17_Xo\xe1\x93\xa4\x11$\x16\tX\xaeS\xd4=\xd0\xbaq<\x83: \x00\x00\x00\x00\x00\x00\x00\xddK\xb9\x98\x01\xd3\x95\x99;m\xb8D\x7fY,\xd6\x10\xd7\x15j\xab\xaa\xc4\x9a\x0e\x15\xf6\x1e\xd7\xbc\x0b\x19_\x00\x00\x00\x00\x00\x00\x00C\x00\x00\x00\x00\x00\x00\x00X\xe5c))\x00\xc8\x8a\xe8`\xcdf\xc8\xe1\xf7n\x06\x9f\xf6\xa1\xa9\xf0\xc2\x95\x0e\xc9\x85\xeb\xb65\x00\n=\x8dU\xa4f\x868_\x10\x8d\rs.\xe4\xecZYk\xa8\xd1\x96\x97\x0b\x9fJ\x06\xed\xb1\xa2\xc0\xddQ\x06\xc9K\x0c\x00\x00\x00\x00\x00\x00\x00\x0b\xb4\xf2\x13\xfa\xa2 \x04_l\xe9\x1f\x08\x00\x00\x00\x00\x00\x00\x00AES_GCM_', 'reveal_round': 27367361, 'commit_reveal_version': 4}.
+[34m2026-03-30 22:21:56.411[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:subtensor.py:4861 | Not waiting for finalization or inclusion.
+[34m2026-03-30 22:21:56.411[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:weights.py:138 | Not waiting for finalization or inclusion.
+[34m2026-03-30 22:21:56.411[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:validator.py:282 | set_weights on chain successfully!
+[34m2026-03-30 22:21:56.411[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:validator.py:368 | Saving validator state.
+[34m2026-03-30 22:21:56.411[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:validator.py:147 | step(2) block(6799490)
+[34m2026-03-30 22:21:56.411[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:forward.py:175 | Scoring 3 miners at block 6799490
+[34m2026-03-30 22:21:58.011[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:forward.py:209 | Benchmark: 83 images (seed='0x127b0f2ba619fe921e225a1ad1b5edb44333d88e90650a6bf977aa9951c668c1')
+[34m2026-03-30 22:21:58.011[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:forward.py:220 | [uid 0] no model cached — score 0
+[34m2026-03-30 22:21:59.699[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:forward.py:127 | [uid 1] score=0.7999  latency=6.1ms  outputs=1 (bin)
+[34m2026-03-30 22:22:00.495[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:validator.py:98 | Validator running | block=6799491 step=2 cached_models=2
+[34m2026-03-30 22:22:03.105[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:forward.py:127 | [uid 2] score=0.8766  latency=25.9ms  outputs=2 (seg)
+[34m2026-03-30 22:22:03.107[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:validator.py:356 | Scattered rewards: [0.         0.79987687 0.8765728 ]
+[34m2026-03-30 22:22:03.107[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:validator.py:364 | Updated moving avg scores: [0.         0.21676664 0.23755121 0.        ]
+[34m2026-03-30 22:22:03.107[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:forward.py:253 | Scores this epoch: uid=2 0.8766  uid=1 0.7999  uid=0 0.0000
+[34m2026-03-30 22:22:03.313[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:validator.py:288 | resync_metagraph()
+[34m2026-03-30 22:22:03.761[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:validator.py:368 | Saving validator state.
+[34m2026-03-30 22:22:03.761[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:validator.py:147 | step(3) block(6799491)
+[34m2026-03-30 22:22:03.762[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:forward.py:175 | Scoring 3 miners at block 6799491
+[34m2026-03-30 22:22:05.363[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:forward.py:209 | Benchmark: 83 images (seed='0x127b0f2ba619fe921e225a1ad1b5edb44333d88e90650a6bf977aa9951c668c1')
+[34m2026-03-30 22:22:05.363[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:forward.py:220 | [uid 0] no model cached — score 0
+[34m2026-03-30 22:22:07.069[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:forward.py:127 | [uid 1] score=0.7999  latency=6.2ms  outputs=1 (bin)
+[34m2026-03-30 22:22:10.448[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:forward.py:127 | [uid 2] score=0.8766  latency=25.7ms  outputs=2 (seg)
+[34m2026-03-30 22:22:10.450[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:validator.py:356 | Scattered rewards: [0.         0.79987687 0.8765728 ]
+[34m2026-03-30 22:22:10.450[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:validator.py:364 | Updated moving avg scores: [0.         0.27507764 0.30145335 0.        ]
+[34m2026-03-30 22:22:10.450[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:forward.py:253 | Scores this epoch: uid=2 0.8766  uid=1 0.7999  uid=0 0.0000
+[34m2026-03-30 22:22:10.556[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:validator.py:368 | Saving validator state.
+[34m2026-03-30 22:22:10.556[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:validator.py:147 | step(4) block(6799491)
+[34m2026-03-30 22:22:10.556[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:forward.py:175 | Scoring 3 miners at block 6799491
+[34m2026-03-30 22:22:12.173[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:forward.py:209 | Benchmark: 83 images (seed='0x127b0f2ba619fe921e225a1ad1b5edb44333d88e90650a6bf977aa9951c668c1')
+[34m2026-03-30 22:22:12.173[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:forward.py:220 | [uid 0] no model cached — score 0
+[34m2026-03-30 22:22:12.495[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:validator.py:98 | Validator running | block=6799492 step=4 cached_models=2
+[34m2026-03-30 22:22:13.851[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:forward.py:127 | [uid 1] score=0.7999  latency=6.1ms  outputs=1 (bin)
+[34m2026-03-30 22:22:17.203[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:forward.py:127 | [uid 2] score=0.8766  latency=25.6ms  outputs=2 (seg)
+[34m2026-03-30 22:22:17.204[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:validator.py:356 | Scattered rewards: [0.         0.79987687 0.8765728 ]
+[34m2026-03-30 22:22:17.204[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:validator.py:364 | Updated moving avg scores: [0.         0.32755756 0.35896528 0.        ]
+[34m2026-03-30 22:22:17.204[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:forward.py:253 | Scores this epoch: uid=2 0.8766  uid=1 0.7999  uid=0 0.0000
+[34m2026-03-30 22:22:17.414[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:validator.py:368 | Saving validator state.
+[34m2026-03-30 22:22:17.414[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:validator.py:147 | step(5) block(6799492)
+[34m2026-03-30 22:22:17.414[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:forward.py:175 | Scoring 3 miners at block 6799492
+[34m2026-03-30 22:22:19.098[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:forward.py:209 | Benchmark: 83 images (seed='0x127b0f2ba619fe921e225a1ad1b5edb44333d88e90650a6bf977aa9951c668c1')
+[34m2026-03-30 22:22:19.099[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:forward.py:220 | [uid 0] no model cached — score 0
+[34m2026-03-30 22:22:20.762[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:forward.py:127 | [uid 1] score=0.7999  latency=6.0ms  outputs=1 (bin)
+[34m2026-03-30 22:22:24.117[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:forward.py:127 | [uid 2] score=0.8766  latency=25.6ms  outputs=2 (seg)
+[34m2026-03-30 22:22:24.119[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:validator.py:356 | Scattered rewards: [0.         0.79987687 0.8765728 ]
+[34m2026-03-30 22:22:24.119[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:validator.py:364 | Updated moving avg scores: [0.         0.37478948 0.410726   0.        ]
+[34m2026-03-30 22:22:24.119[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:forward.py:253 | Scores this epoch: uid=2 0.8766  uid=1 0.7999  uid=0 0.0000
+[34m2026-03-30 22:22:24.274[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:validator.py:368 | Saving validator state.
+[34m2026-03-30 22:22:24.274[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:validator.py:147 | step(6) block(6799493)
+[34m2026-03-30 22:22:24.274[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:forward.py:175 | Scoring 3 miners at block 6799493
+[34m2026-03-30 22:22:24.501[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:validator.py:98 | Validator running | block=6799493 step=6 cached_models=2
+[34m2026-03-30 22:22:26.146[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:forward.py:209 | Benchmark: 83 images (seed='0x127b0f2ba619fe921e225a1ad1b5edb44333d88e90650a6bf977aa9951c668c1')
+[34m2026-03-30 22:22:26.146[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:forward.py:220 | [uid 0] no model cached — score 0
+[34m2026-03-30 22:22:27.789[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:forward.py:127 | [uid 1] score=0.7999  latency=5.9ms  outputs=1 (bin)
+[34m2026-03-30 22:22:31.138[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:forward.py:127 | [uid 2] score=0.8766  latency=25.6ms  outputs=2 (seg)
+[34m2026-03-30 22:22:31.140[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:validator.py:356 | Scattered rewards: [0.         0.79987687 0.8765728 ]
+[34m2026-03-30 22:22:31.140[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:validator.py:364 | Updated moving avg scores: [0.         0.4172982  0.45731068 0.        ]
+[34m2026-03-30 22:22:31.140[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:forward.py:253 | Scores this epoch: uid=2 0.8766  uid=1 0.7999  uid=0 0.0000
+[34m2026-03-30 22:22:31.484[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:validator.py:368 | Saving validator state.
+[34m2026-03-30 22:22:31.485[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:validator.py:147 | step(7) block(6799493)
+[34m2026-03-30 22:22:31.485[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:forward.py:175 | Scoring 3 miners at block 6799493
+[34m2026-03-30 22:22:43.380[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:forward.py:209 | Benchmark: 83 images (seed='0x127b0f2ba619fe921e225a1ad1b5edb44333d88e90650a6bf977aa9951c668c1')
+[34m2026-03-30 22:22:43.380[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:forward.py:220 | [uid 0] no model cached — score 0
+[34m2026-03-30 22:22:45.076[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:forward.py:127 | [uid 1] score=0.7999  latency=6.1ms  outputs=1 (bin)
+[34m2026-03-30 22:22:48.430[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:forward.py:127 | [uid 2] score=0.8766  latency=25.6ms  outputs=2 (seg)
+[34m2026-03-30 22:22:48.432[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:validator.py:356 | Scattered rewards: [0.         0.79987687 0.8765728 ]
+[34m2026-03-30 22:22:48.432[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:validator.py:364 | Updated moving avg scores: [0.         0.45555604 0.49923688 0.        ]
+[34m2026-03-30 22:22:48.432[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:forward.py:253 | Scores this epoch: uid=2 0.8766  uid=1 0.7999  uid=0 0.0000
+[34m2026-03-30 22:22:48.592[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:validator.py:368 | Saving validator state.
+[34m2026-03-30 22:22:48.592[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:validator.py:147 | step(8) block(6799495)
+[34m2026-03-30 22:22:48.593[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:forward.py:175 | Scoring 3 miners at block 6799495
+[34m2026-03-30 22:22:55.407[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:forward.py:209 | Benchmark: 83 images (seed='0x127b0f2ba619fe921e225a1ad1b5edb44333d88e90650a6bf977aa9951c668c1')
+[34m2026-03-30 22:22:55.407[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:forward.py:220 | [uid 0] no model cached — score 0
+[34m2026-03-30 22:22:57.108[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:forward.py:127 | [uid 1] score=0.7999  latency=6.0ms  outputs=1 (bin)
+[34m2026-03-30 22:23:00.496[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:forward.py:127 | [uid 2] score=0.8766  latency=25.9ms  outputs=2 (seg)
+[34m2026-03-30 22:23:00.497[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:validator.py:356 | Scattered rewards: [0.         0.79987687 0.8765728 ]
+[34m2026-03-30 22:23:00.497[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:validator.py:364 | Updated moving avg scores: [0.        0.4899881 0.5369705 0.       ]
+[34m2026-03-30 22:23:00.497[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:forward.py:253 | Scores this epoch: uid=2 0.8766  uid=1 0.7999  uid=0 0.0000
+[34m2026-03-30 22:23:00.944[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:validator.py:368 | Saving validator state.
+[34m2026-03-30 22:23:00.944[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:validator.py:147 | step(9) block(6799496)
+[34m2026-03-30 22:23:00.945[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:forward.py:175 | Scoring 3 miners at block 6799496
+[34m2026-03-30 22:23:07.389[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:forward.py:209 | Benchmark: 83 images (seed='0x127b0f2ba619fe921e225a1ad1b5edb44333d88e90650a6bf977aa9951c668c1')
+[34m2026-03-30 22:23:07.389[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:forward.py:220 | [uid 0] no model cached — score 0
+[34m2026-03-30 22:23:09.135[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:forward.py:127 | [uid 1] score=0.7999  latency=6.2ms  outputs=1 (bin)

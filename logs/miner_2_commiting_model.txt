@@ -1,0 +1,23 @@
+!NOTE: This is a copy pasted log from the terminal.
+
+(.venv) [luka@luka-arch defektr]$ python training/upload.py --model training/models/improved.onnx --spec challenge_spec.json --wallet-name miner2 --wallet-hotkey default --wallet-path $WALLETS --architecture mobilenet_v2_unet --network wss://test.finney.opentensor.ai
+
+[1/7] Inspecting training/models/improved.onnx …
+      input : image [0, 3, 256, 256] float32
+      output: confidence [0]
+      output: mask [0, 1, 256, 256]
+      size  : 22.809 MB
+[2/7] Validating against challenge spec …
+      ✓ input shape / dtype / size OK
+[3/7] Checking edge deployability (hardware_factor=15.0x) …
+      25.6 ms measured × 15.0x = 384.0 ms simulated → 2.6 FPS ✓
+[4/7] Computing SHA-256 …
+      f2506a8ff62f256acf97d2cdd954b98d2f628f0c658a894d92cd48d20e899f6b
+[5/7] Uploading model to IPFS …
+      model CID: bafybeiasdaias5tkucoruwtutuwqr6ah6s3rj6ot432kprzkcpvrj5dsuu
+[6/7] Building and uploading metadata …
+      metadata CID: bafkreidxzsblo4xrf27vrx5celevsyehxokuebt76vnh7n7zy6vjsookce
+[7/7] Committing metadata CID on-chain …
+      ✓ committed to netuid 29
+
+Done. Metadata CID: bafkreidxzsblo4xrf27vrx5celevsyehxokuebt76vnh7n7zy6vjsookce

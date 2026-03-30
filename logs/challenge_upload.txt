@@ -1,0 +1,8 @@
+(.venv) [luka@luka-arch defektr]$ python scripts/publish_challenge.py --spec challenge_spec.json --update-blocks
+Updated challenge_block=6800000  deadline_block=6850000
+Uploading challenge_spec.json to IPFS …
+Challenge spec CID: bafkreiflik6bmnel7m3va246lqslrusjedhfzr3esuupewfhvsqxruthx4
+Committing CID on-chain (netuid=29) …
+Done. Miners can fetch spec via:
+   subtensor.get_commitment(29, <validator_uid>)  → bafkreiflik6bmnel7m3va246lqslrusjedhfzr3esuupewfhvsqxruthx4
+(.venv) [luka@luka-arch defektr]$ 

@@ -1,0 +1,10 @@
+[34m2026-03-30 22:22:34.439[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:loggingmachine.py:480 | Debug enabled.
+[34m2026-03-30 22:22:34.692[39m | [1m[34m DEBUG  [39m[49m[0m | bittensor:subtensor.py:234 | Connecting to network: [34mtest[0m, chain_endpoint: [34mwss://test.finney.opentensor.ai:443[0m> ...
+[34m2026-03-30 22:22:36.843[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:miner.py:77 | Defektr miner starting
+[34m2026-03-30 22:22:36.843[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:miner.py:78 | Hotkey  : 5DPZ9w6AfTGrwMojB1E1JmgCt59JbnmesKdN7L6qrFdR4j3P
+[34m2026-03-30 22:22:36.843[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:miner.py:79 | Network : wss://test.finney.opentensor.ai
+[34m2026-03-30 22:22:36.844[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:miner.py:80 | Netuid  : 29
+[34m2026-03-30 22:22:36.845[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:miner.py:91 | UID     : 2
+[34m2026-03-30 22:22:37.746[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:miner.py:104 | [block 6799494] New challenge period started at block 6750000
+[34m2026-03-30 22:22:37.746[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:miner.py:110 | [block 6799494] uid=2 committed_cid=bafkreidxzsblo4xrf27…
+[34m2026-03-30 22:22:38.210[39m | [1m[37m  INFO  [39m[49m[0m | bittensor:miner.py:123 | [block 6799494] uid=2  incentive=0.0000

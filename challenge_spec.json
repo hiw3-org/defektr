@@ -1,5 +1,6 @@
 {
   "challenge_id": "defektr-001",
+  "netuid": 29,
   "challenge_block": 10,
   "deadline_block": 22,
   "dataset": "mvtec_ad",

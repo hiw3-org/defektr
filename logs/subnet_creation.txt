@@ -1,0 +1,52 @@
+!NOTE: This is a copy pasted log from the terminal.
+
+(.venv) [luka@luka-arch defektr]$ btcli subnet create --wallet.name owner --wallet.path /home/luka/ws/bittensor_test/defektr/wallets --subtensor.network wss://test.finney.opentensor.ai
+Enter the wallet hotkey(Hint: You can set this with `btcli config set --wallet-hotkey`) (default): 
+Subnet name (optional) (): defektr
+GitHub repository URL (optional) (): https://github.com/hiw3-org/defektr
+Contact email (optional) (): contact@hiw3.com
+Subnet URL (optional) (): 
+Discord handle (optional) (): 
+Description (optional) (): AI models for manufacturing visual defect detection
+Logo URL (optional) (): https://imgur.com/a/cH7dIxH
+Additional information (optional) (): 
+Subnet burn cost: ‎6,314.9664 τ‎
+Your balance is: ‎9,897.9895 τ‎
+Do you want to burn ‎6,314.9664 τ‎ to register a subnet? [y/n] (n): y
+Enter your password: 
+Decrypting...
+✅ Your extrinsic has been included as 6799253-6
+✅ Registered subnetwork with netuid: 29
+
+Would you like to set your own identity? [y/n] (n): y
+❌ Existing identity not found for 5DqCkgJsmyGHDHzGtFMgJP2VzjSxpJa2L4F6PwoFuATZypBc on Network: custom, Chain: wss://test.finney.opentensor.ai
+
+
+Cost to register an Identity is 0.1 TAO, are you sure you wish to continue? [y/n] (n): y
+
+All fields are optional. Press Enter to skip and keep the default/existing value.
+Tip: Entering a space and pressing Enter will clear existing default value.
+
+Display name (): Defektr
+Web URL (): 
+Image URL (): https://imgur.com/a/cH7dIxH
+Discord handle (): 
+Description (): AI models for manufacturing visual defect detection
+Additional information (): 
+GitHub repository URL (): https://github.com/hiw3-org/defektr
+✅ Success!
+✅ Your extrinsic has been included as 6799265-6
+                                                                   
+                       New on-chain Identity                       
+                                                                   
+        Item ┃ Value                                               
+━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     Address │ 5DqCkgJsmyGHDHzGtFMgJP2VzjSxpJa2L4F6PwoFuATZypBc    
+        name │ Defektr                                             
+         url │ ~                                                   
+ github_repo │ https://github.com/hiw3-org/defektr                 
+       image │ https://imgur.com/a/cH7dIxH                         
+     discord │ ~                                                   
+ description │ AI models for manufacturing visual defect detection 
+  additional │ ~                                                   
+─────────────┼─────────────────────────────────────────────────────

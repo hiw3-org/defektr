@@ -1,0 +1,21 @@
+!NOTE: This is a copy pasted log from the terminal.
+
+(.venv) [luka@luka-arch defektr]$ python scripts/setup_hotkeys.py --miners 2 --skip-funding
+Connecting to wss://test.finney.opentensor.ai …
+
+[1/4] Creating hotkeys …  (wallet path: /home/luka/ws/bittensor_test/defektr/wallets)
+  Exists  miner/hotkey_0  5FgaWfysRzLHcwCnNsY1SHscn4tzRbPCrCatNWUPdq87MPt3  (baseline)
+  Exists  miner2/default  5DPZ9w6AfTGrwMojB1E1JmgCt59JbnmesKdN7L6qrFdR4j3P  (improved)
+  Exists  validator/hotkey_0  5D7BwrkXdaV1inaRzUHhaNtDjN6nDdF1xuvuUeN7UpNQTRz9
+
+[2/4] Skipping funding (--skip-funding) — fund coldkeys manually via btcli wallet transfer
+
+[3/4] Registering 2 miner + 1 validator hotkeys on netuid 29 …
+  Register miner/hotkey_0: already registered OK
+  Register miner2/default: already registered OK
+  Register validator/hotkey_0: already registered OK
+
+[4/4] Adding 100 TAO stake to each validator hotkey …
+Enter your password: 
+Decrypting...
+  Stake validator/hotkey_0: OK +100 TAO
