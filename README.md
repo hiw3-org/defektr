@@ -6,7 +6,26 @@ Defektr is a Bittensor subnet that produces edge-deployable AI models for manufa
 
 **Hackathon:** Bittensor Subnet Ideathon — Round 2
 
-**Testnet deployment:** Subnet registered on `wss://test.finney.opentensor.ai` at **netuid 29** (block 6,799,253, call hash `0x49ea7ed87586b52ac3fd96347db5a2dff3787a4f05ab2a83581e210d33234000`, extrinsic `subtensorModule.registerNetworkWithIdentity`). Due to testnet rate limits, we managed to register **8 miners and 1 validator hotkey** before the submission deadline.
+**Testnet deployment:** Subnet registered on `wss://test.finney.opentensor.ai` at **netuid 29** (block 6,799,253, call hash `0x49ea7ed87586b52ac3fd96347db5a2dff3787a4f05ab2a83581e210d33234000`, extrinsic `subtensorModule.registerNetworkWithIdentity`). **10 miners and 3 validators** are registered and staked on the testnet (UIDs 0–13).
+
+```
+UID   hotkey                                             incentive    stake
+--------------------------------------------------------------------------------
+0     5DWot4u96GEdAEsj4zfeKoQSueYpgPyFCj7GmL2fTxKr4Zhg   0.0000       0.0000
+1     5FgaWfysRzLHcwCnNsY1SHscn4tzRbPCrCatNWUPdq87MPt3   0.0000       0.3600
+2     5DPZ9w6AfTGrwMojB1E1JmgCt59JbnmesKdN7L6qrFdR4j3P   0.0000       0.3600
+3     5D7BwrkXdaV1inaRzUHhaNtDjN6nDdF1xuvuUeN7UpNQTRz9   0.0000       0.1800
+4     5CXxPXgxL3Rh6NVtaqPVseiPnx4Y33aw4kfT2n9uNsojhC4F   0.0000       0.1800
+5     5CM7sqmsYzFMqtV8qpH9DhkeZVoEGTGZeoKY9VQ7QqyfPnBE   0.0000       0.1800
+6     5HNYR8U7VuLAY5o8LGecdQTHWAji2T8EEBb28tLnvnG6Bw9f   0.0000       0.1800
+7     5Et74MuUiV7Q4AzJUHR38wNHpBQ1etv4gLYEot1N8ooqC2Gq   0.0000       0.1800
+8     5EA4CzPRTyCBKhEPgAKTohDAiEN4ruZHrTxPAA8eSLnSy5gK   0.0000       0.1800
+9     5CVB9YkHbc7DEedStSrutq2DvHubHC2DeG4jRjdgVs5Mrt2W   0.0000       0.1800
+10    5D7qf6jHksU5hn2dwpZX5S6nzGKMF4vY2W96nLW3TjAUURvF   0.0000       0.1800
+11    5E4oaMnN7tNjPnHU2N4Ah1zNnbVibP5twTvyyneksVLgGRtz   0.0000       0.1800
+12    5HdYd8SMKKqNjFdWWVeaEHGnfCjbfaj678U494rMXmLvK5MJ   0.0000       0.1800
+13    5FGw4PsL5ti1VjVnagToqQVCVkYjG7XsKXoSRzigEHvYSWUR   0.0000       0.1800
+```
 
 **Logs:** The `logs/` directory contains official testnet logs from the validator and miners running against netuid 29, including `set_weights()` calls and copy-detection events.
 
