@@ -1,10 +1,14 @@
 # Defektr — Subnet for Manufacturing Visual Quality Control
 
-<img src="media/DefektrLogo.png" alt="Defektr Logo" width="400" />
+<p align="center"><img src="media/DefektrLogo.png" alt="Defektr Logo" width="400" /></p>
 
 Defektr is a Bittensor subnet that produces edge-deployable AI models for manufacturing visual defect detection. Miners compete to build the best defect detection models, validators evaluate them on real benchmark images, and factories purchase the top-performing models.
 
 **Hackathon:** Bittensor Subnet Ideathon — Round 2
+
+**Testnet deployment:** Subnet registered on `wss://test.finney.opentensor.ai` at **netuid 29** (block 6,799,253, call hash `0x49ea7ed87586b52ac3fd96347db5a2dff3787a4f05ab2a83581e210d33234000`, extrinsic `subtensorModule.registerNetworkWithIdentity`). Due to testnet rate limits, we managed to register **8 miners and 1 validator hotkey** before the submission deadline.
+
+**Logs:** The `logs/` directory contains official testnet logs from the validator and miners running against netuid 29, including `set_weights()` calls and copy-detection events.
 
 ---
 

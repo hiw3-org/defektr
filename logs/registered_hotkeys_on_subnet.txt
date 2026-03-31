@@ -1,0 +1,15 @@
+!NOTE: This are the registered hotkeys on the online testnet.
+
+(.venv) [luka@luka-arch defektr]$ python scripts/show_metagraph.py
+UID   hotkey                                             incentive    stake       
+--------------------------------------------------------------------------------
+0     5DWot4u96GEdAEsj4zfeKoQSueYpgPyFCj7GmL2fTxKr4Zhg   0.0000       0.0000      
+1     5FgaWfysRzLHcwCnNsY1SHscn4tzRbPCrCatNWUPdq87MPt3   0.0000       0.1800      
+2     5DPZ9w6AfTGrwMojB1E1JmgCt59JbnmesKdN7L6qrFdR4j3P   0.0000       0.1800      
+3     5D7BwrkXdaV1inaRzUHhaNtDjN6nDdF1xuvuUeN7UpNQTRz9   0.0000       0.0000      
+4     5CXxPXgxL3Rh6NVtaqPVseiPnx4Y33aw4kfT2n9uNsojhC4F   0.0000       0.0000      
+5     5CM7sqmsYzFMqtV8qpH9DhkeZVoEGTGZeoKY9VQ7QqyfPnBE   0.0000       0.0000      
+6     5HNYR8U7VuLAY5o8LGecdQTHWAji2T8EEBb28tLnvnG6Bw9f   0.0000       0.0000      
+7     5Et74MuUiV7Q4AzJUHR38wNHpBQ1etv4gLYEot1N8ooqC2Gq   0.0000       0.0000      
+8     5EA4CzPRTyCBKhEPgAKTohDAiEN4ruZHrTxPAA8eSLnSy5gK   0.0000       0.0000      
+9     5CVB9YkHbc7DEedStSrutq2DvHubHC2DeG4jRjdgVs5Mrt2W   0.0000       0.0000   
